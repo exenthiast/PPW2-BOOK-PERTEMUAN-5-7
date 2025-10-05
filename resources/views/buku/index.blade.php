@@ -1,16 +1,10 @@
-<!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Data Buku</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    </head>
-    <body>
+@extends('buku.layout')
+
+@section('content')
         <div class="container d-flex justify-content-center mt-3" style="min-height: 100vh;">
             <div class="w-100">
                 <h1 class="text-center mb-4">Top 5 Buku Terbaru</h1>
+                <a href="{{ route('buku.create') }}" class="btn btn-primary float-end mb-3">Tambah Buku</a>
                 <table class="table table-striped table-bordered mb-5 mx-auto">
                     <thead class="table-dark">
                         <tr>
@@ -30,7 +24,16 @@
                             <td>{{ $buku->pengarang }}</td>
                             <td>{{ "Rp. ".number_format($buku->harga, 2, ',', '.') }}</td>
                             <td>{{ $buku->tgl_terbit->format('d-m-Y') }}</td>
-                            <td>Berhasil</td>
+                            <td>
+                                <div class="d-flex gap-2">
+                                    <a href="{{ route('buku.edit', $buku->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                    <form action="{{ route('buku.destroy', $buku->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus buku ini?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                    </form>
+                                </div>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -83,7 +86,15 @@
                                 <td>{{ $buku->pengarang }}</td>
                                 <td>{{ "Rp. ".number_format($buku->harga, 2, ',', '.') }}</td>
                                 <td>{{ $buku->tgl_terbit->format('d-m-Y') }}</td>
-                                <td>Berhasil</td>
+                                <td><div class="d-flex gap-2">
+                                    <a href="{{ route('buku.edit', $buku->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                    <form action="{{ route('buku.destroy', $buku->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus buku ini?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                    </form>
+                                    </div>
+                                </td>
                             </tr>
                             @endforeach
                         @endif
@@ -106,6 +117,4 @@
                 </div>
             </div>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    </body>
-    </html>
+@endsection

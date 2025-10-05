@@ -29,6 +29,63 @@ class BookController extends Controller
         $total_harga = Book::sum('harga');
         $max_harga = Book::max('harga');
         $min_harga = Book::min('harga');
-        return view('index', compact('data_buku', 'data_top', 'jumlah_buku', 'total_harga', 'max_harga', 'min_harga', 'pengarang', 'nama_pengarang', 'cari'));
+        return view('buku.index', compact('data_buku', 'data_top', 'jumlah_buku', 'total_harga', 'max_harga', 'min_harga', 'pengarang', 'nama_pengarang', 'cari'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return view('buku.create');
+    }
+
+    public function store(Request $request)
+    {
+        $buku = new Buku();
+        $buku->judul = $request->input('judul');
+        $buku->pengarang = $request->input('pengarang');
+        $buku->harga = $request->input('harga');
+        $buku->tgl_terbit = $request->input('tgl_terbit');
+        $buku->save();
+
+        return redirect()->route('buku.index');
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.    
+     */
+    public function edit(string $id)
+    {   
+        $buku = Book::find($id);
+        return view('buku.edit', compact('buku'));
+    }
+
+    public function update(Request $request, string $id)
+    {
+        $buku = Book::find($id);
+        $buku->update($request->all());
+
+        return redirect()->route('buku.index');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        $buku = Book::find($id);
+        if ($buku) {
+            $buku->delete();
+        }
+        return redirect()->route('buku.index');
     }
 }

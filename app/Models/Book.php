@@ -12,4 +12,5 @@ class Book extends Model
     protected $casts = [
         'tgl_terbit' => 'date',
     ];
+    protected $fillable = ['judul', 'pengarang', 'harga', 'tgl_terbit'];
 }
