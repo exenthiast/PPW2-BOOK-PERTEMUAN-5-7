@@ -42,7 +42,7 @@ class BookController extends Controller
 
     public function store(Request $request)
     {
-        $buku = new Buku();
+        $buku = new Book();
         $buku->judul = $request->input('judul');
         $buku->pengarang = $request->input('pengarang');
         $buku->harga = $request->input('harga');
