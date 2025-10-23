@@ -1,15 +1,14 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\BookController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', function () {
-    return view('home');
+Route::get('/dashboard', function () {
+    return view('dashboard');
 });
 
 Route::get('/about', function () {
@@ -24,3 +23,15 @@ Route::delete('/buku/{id}', [BookController::class, 'destroy'])->name('buku.dest
 
 Route::get('/buku/{id}/edit', [BookController::class, 'edit'])->name('buku.edit');
 Route::put('/buku/{id}', [BookController::class, 'update'])->name('buku.update');
+
+Route::get('/home', function () {
+    return view('home');
+})->middleware(['auth', 'verified'])->name('home');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';
