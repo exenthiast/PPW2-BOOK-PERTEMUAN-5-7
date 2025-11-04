@@ -29,7 +29,7 @@ class BookController extends Controller
         $total_harga = Book::sum('harga');
         $max_harga = Book::max('harga');
         $min_harga = Book::min('harga');
-        return view('buku.index', compact('data_buku', 'data_top', 'jumlah_buku', 'total_harga', 'max_harga', 'min_harga', 'pengarang', 'nama_pengarang', 'cari'));
+        return view('buku.index', compact('data_top', 'data_buku',  'jumlah_buku', 'total_harga', 'max_harga', 'min_harga', 'pengarang', 'nama_pengarang', 'cari'));
     }
 
     /**
