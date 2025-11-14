@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SendEmailController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -53,5 +54,10 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
 
     Route::delete('/buku/{id}', [BookController::class, 'destroy'])->name('buku.destroy');
 });
+
+Route::get('/send-email', [SendEmailController::class, 'index'])->name('kirim.email');
+
+Route::get('/kirim-email', [SendEmailController::class, 'index'])->name('kirim-email');
+Route::post('/post-email', [SendEmailController::class, 'store'])->name('post-email');
 
 require __DIR__.'/auth.php';
