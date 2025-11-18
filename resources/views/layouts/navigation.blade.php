@@ -15,10 +15,18 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+
+                    <x-nav-link :href="route('jobs.index')" :active="request()->routeIs('jobs.index')">
+                        {{ __('Lowongan') }}
+                    </x-nav-link>
                     
                     @if(Auth::user()->role === 'admin')
                     <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
                         {{ __('Management Users') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('applications.index', ['job' => 1])">
+                        {{ __('Pelamar') }}
                     </x-nav-link>
                     @endif
                 </div>

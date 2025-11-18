@@ -6,14 +6,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class Application extends Model
 {
-    use HasFactory;
-    protected $fillable = ['user_id', 'job_id', 'cv', 'status'];
+    protected $fillable = [
+        'user_id',
+        'job_id',
+        'cv',
+        'status',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
     }
+
     public function job()
     {
-        return $this->belongsTo(JobVacancy::class, 'job_id');
+        return $this->belongsTo(Job::class);
     }
 }
+
