@@ -70,6 +70,9 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/applications/export', [ApplicationController::class, 'export'])
         ->name('applications.export');
 
+    Route::get('/applications/{application}/download-cv', [ApplicationController::class, 'downloadCv'])
+        ->name('applications.downloadCv');
+
     // import lowongan dari file Excel
     Route::post('/jobs/import', [JobController::class, 'import'])
         ->name('jobs.import');

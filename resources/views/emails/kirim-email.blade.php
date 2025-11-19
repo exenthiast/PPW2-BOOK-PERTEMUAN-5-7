@@ -29,12 +29,20 @@
                         @csrf
                         <div class="mb-3">
                             <label for="name" class="form-label">Nama</label>
-                            <input type="text" name="name" id="name" class="form-control" placeholder="Nama pengirim" required>
+                            <input type="text" name="name" id="name" class="form-control" 
+                                   value="{{ $application ? $application->user->name : '' }}" 
+                                   placeholder="Nama pengirim" 
+                                   {{ $application ? 'readonly' : '' }} 
+                                   required>
                         </div>
 
                         <div class="mb-3">
                             <label for="email" class="form-label">Email Tujuan</label>
-                            <input type="email" name="email" id="email" class="form-control" placeholder="Alamat email penerima" required>
+                            <input type="email" name="email" id="email" class="form-control" 
+                                   value="{{ $application ? $application->user->email : '' }}" 
+                                   placeholder="Alamat email penerima" 
+                                   {{ $application ? 'readonly' : '' }} 
+                                   required>
                         </div>
 
                         <div class="mb-3">

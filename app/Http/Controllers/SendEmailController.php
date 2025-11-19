@@ -6,13 +6,22 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use App\Mail\SendEmail;
 use App\Jobs\SendMailJob;
+use App\Models\Application;
 
 class SendEmailController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('emails.kirim-email');
+        $application = null;
+        
+        // Jika ada parameter application_id, ambil data pelamar
+        if ($request->has('application_id')) {
+            $application = Application::with('user')->findOrFail($request->application_id);
+        }
+        
+        return view('emails.kirim-email', compact('application'));
     }
+    
     public function store(Request $request)
     {
         $data = $request->all();
