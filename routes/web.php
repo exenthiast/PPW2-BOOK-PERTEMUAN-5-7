@@ -26,6 +26,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::apiResource('api/books', App\Http\Controllers\Api\BookApiController::class);
+
 Route::get('/about', function () {
     return view('about');
 });
