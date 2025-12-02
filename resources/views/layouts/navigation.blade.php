@@ -16,6 +16,10 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
+                    <x-nav-link :href="route('buku.index')" :active="request()->routeIs('buku.*')">
+                        {{ __('Daftar Buku') }}
+                    </x-nav-link>
+
                     <x-nav-link :href="route('jobs.index')" :active="request()->routeIs('jobs.index')">
                         {{ __('Lowongan') }}
                     </x-nav-link>
@@ -83,6 +87,10 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
+            </x-responsive-nav-link>
+            
+            <x-responsive-nav-link :href="route('buku.index')" :active="request()->routeIs('buku.*')">
+                {{ __('Daftar Buku') }}
             </x-responsive-nav-link>
             
             @if(Auth::user()->role === 'admin')

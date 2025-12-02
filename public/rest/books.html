@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>REST API Test</title>
+</head>
+<body>
+    <h1>Data Buku dari API</h1>
+    <div id="result"></div>
+
+    <script>
+    fetch("http://localhost:8000/api/books")
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            document.getElementById("result").innerHTML = JSON.stringify(data);
+        });
+    </script>
+</body>
+</html>

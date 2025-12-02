@@ -7,8 +7,9 @@ use App\Models\Book;
 
 class BookController extends Controller
 {
-    public function index(Request $request)
+    public function dashboard(Request $request)
     {
+        // Dashboard menampilkan tampilan tabel lengkap seperti sebelumnya
         $pengarang = Book::select('pengarang')->distinct()->get();
         $nama_pengarang = $request->input('pengarang', 'all');
         $cari = $request->input('cari', '');
@@ -30,6 +31,12 @@ class BookController extends Controller
         $max_harga = Book::max('harga');
         $min_harga = Book::min('harga');
         return view('buku.index', compact('data_top', 'data_buku',  'jumlah_buku', 'total_harga', 'max_harga', 'min_harga', 'pengarang', 'nama_pengarang', 'cari'));
+    }
+
+    public function index(Request $request)
+    {
+        // Halaman daftar buku menggunakan API
+        return view('buku.book-list');
     }
 
     /**
